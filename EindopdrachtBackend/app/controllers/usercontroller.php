@@ -66,7 +66,7 @@ class UserController extends Controller
                 'userId' => $user->id,
                 'username' => $user->username,
             ]
-        ], parse_ini_file('../.env')["SECRET_KEY"]);
+        ], parse_ini_file('../.env')["SECRET_KEY"], 'HS256');
 
         return $jwt;
     }
