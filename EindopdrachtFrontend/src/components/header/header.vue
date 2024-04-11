@@ -15,8 +15,9 @@
               Account
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><router-link class="dropdown-item" to="/register">Register</router-link></li>
-              <li><router-link class="dropdown-item" to="/login">Login</router-link></li>
+              <li v-if="!isLoggedIn"><router-link class="dropdown-item" to="/register">Register</router-link></li>
+              <li v-if="!isLoggedIn"><router-link class="dropdown-item" to="/login">Login</router-link></li>
+              <li v-if="isLoggedIn"><a class="dropdown-item" href="#" @click="logout">Logout</a></li>
             </ul>
           </li>
         </ul>
@@ -31,8 +32,23 @@
 </template>
 
 <script>
+import { useAuthStore } from '@/stores/auth';
+
 export default {
-  name: 'Header'
+  name: 'Header',
+  computed: {
+    isLoggedIn() {
+      const auth = useAuthStore();
+      return auth.isLoggedIn;
+    }
+  },
+  methods: {
+    logout() {
+      const auth = useAuthStore();
+      auth.logout();
+      this.$router.push('/login');
+    }
+  }
 };
 </script>
 

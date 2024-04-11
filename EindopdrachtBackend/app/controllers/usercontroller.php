@@ -33,10 +33,8 @@ class UserController extends Controller
     public function loginUser()
     {
         try {
-            // Create a User object from the posted JSON
             $user = $this->createObjectFromPostedJson(User::class);
 
-            // Check the username and password
             $loggedInUser = $this->service->checkUsernamePassword($user->username, $user->password);
 
             if (!$loggedInUser) {
@@ -44,10 +42,8 @@ class UserController extends Controller
                 return;
             }
 
-            // Generate a JWT
             $jwt = $this->generateJwt($loggedInUser);
 
-            // Respond with the JWT
             $this->respond(['jwt' => $jwt]);
         } catch (\Exception $e) {
             error_log($e->getMessage());

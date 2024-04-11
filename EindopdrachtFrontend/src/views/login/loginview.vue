@@ -36,10 +36,14 @@ export default {
                 password: this.password
             })
             .then(response => {
-                console.log('Response from backend:', response.data);
-                axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.jwt}`;
-                const auth = useAuthStore();
-                auth.login(response.data.jwt);
+                if (response.data.jwt) {
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.jwt}`;
+                    const auth = useAuthStore();
+                    auth.login(response.data.jwt);
+                    this.$router.push('/');
+                } else {
+                    console.error('Login attempt failed');
+                }
             })
             .catch(error => {
                 console.error(error);
