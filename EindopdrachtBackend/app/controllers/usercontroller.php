@@ -42,16 +42,16 @@ class UserController extends Controller
                 return;
             }
 
-            $jwt = $this->generateJwt($loggedInUser);
+            $tokenResponse = $this->generateJwt($loggedInUser);
 
-            $this->respond(['jwt' => $jwt]);
+            $this->respond($tokenResponse);
         } catch (\Exception $e) {
             error_log($e->getMessage());
             $this->respondWithError(500, "An error occurred while logging in");
         }
     }
 
-    private function generateJwt($user)
+    public function generateJwt($user)
     {
         $jwt = \Firebase\JWT\JWT::encode([
             'iss' => 'THE_ISSUER',
@@ -64,6 +64,9 @@ class UserController extends Controller
             ]
         ], parse_ini_file('../.env')["SECRET_KEY"], 'HS256');
 
-        return $jwt;
+        return [
+            'jwt' => $jwt,
+            'userId' => $user->id
+        ];
     }
 }

@@ -39,7 +39,7 @@ export default {
                 if (response.data.jwt) {
                     axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.jwt}`;
                     const auth = useAuthStore();
-                    auth.login(response.data.jwt);
+                    auth.login(response.data.jwt, response.data.userId);
                     this.$router.push('/');
                 } else {
                     console.error('Login attempt failed');
