@@ -8,11 +8,32 @@ use Repositories\Repository;
 
 class UserRepository extends Repository
 {
+    public function createUser($user)
+    {
+        try {
+            $user->password = $this->hashPassword($user->password);
+
+            $stmt = $this->connection->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
+            $stmt->bindParam(':username', $user->username);
+            $stmt->bindParam(':password', $user->password);
+            $stmt->execute();
+
+            $user->id = $this->connection->lastInsertId();
+
+            $user->password = "";
+
+            return $user;
+        } catch (PDOException $e) {
+            error_log('Error creating user: ' . $e->getMessage());
+            throw new \Exception('Error creating user');
+        }
+    }
+
     function checkUsernamePassword($username, $password)
     {
         try {
             // retrieve the user with the given username
-            $stmt = $this->connection->prepare("SELECT id, username, password, email FROM user WHERE username = :username");
+            $stmt = $this->connection->prepare("SELECT id, username, password FROM users WHERE username = :username");
             $stmt->bindParam(':username', $username);
             $stmt->execute();
 

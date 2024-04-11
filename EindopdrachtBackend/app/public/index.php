@@ -16,5 +16,9 @@ $router->setNamespace('Controllers');
 // routes for the products endpoint
 $router->get('/products', 'ProductController@getAllProducts');
 
+// routes for the users endpoint
+$router->post('/users', 'UserController@createUser');
+$router->post('/users/login', 'UserController@loginUser');
+
 // Run it!
 $router->run();
