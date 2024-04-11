@@ -12,25 +12,7 @@ class ProductService {
         $this->repository = new ProductRepository();
     }
 
-    public function getAll($offset = NULL, $limit = NULL) {
-        return $this->repository->getAll($offset, $limit);
-    }
-
-    public function getOne($id) {
-        return $this->repository->getOne($id);
-    }
-
-    public function insert($item) {       
-        return $this->repository->insert($item);        
-    }
-
-    public function update($item, $id) {       
-        return $this->repository->update($item, $id);        
-    }
-
-    public function delete($item) {       
-        return $this->repository->delete($item);        
+    public function getAllProducts() {
+        return $this->repository->getAllProducts();
     }
 }
-
-?>

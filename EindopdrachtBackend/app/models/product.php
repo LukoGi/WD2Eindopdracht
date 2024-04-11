@@ -1,16 +1,12 @@
 <?php
+
 namespace Models;
 
 class Product {
-
     public int $id;
-    public string $name;
-    public string $price;
+    public string $title;
+    public float $price;
     public string $description;
+    public string $category;
     public string $image;
-    public string $category_id;
-    public Category $category;
- 
 }
-
-?>

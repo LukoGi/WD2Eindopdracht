@@ -1,9 +1,22 @@
 .full-width {
     width: 100vw;
-    margin-left: -2rem;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
 }
-
 .bi-cart-fill {
     color: green;
     font-size: 2em;
+}
+.navbar-brand {
+    padding-left: 3em; 
+    color: lightblue; 
+}
+.bi-cart-fill {
+    padding-right: 1em; 
+}
+.nav-link {
+    color: white; 
 }
