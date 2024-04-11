@@ -1,8 +1,11 @@
 <script>
 import Header from './components/header/header.vue';
+import Footer from './components/footer/footer.vue';
+
 export default {
   components: {
-    Header
+    Header,
+    Footer
 }
 }
 </script>
@@ -11,6 +14,7 @@ export default {
    <main>
       <RouterView />
   </main>
+  <Footer />
 </template>
 
 <style scoped>
