@@ -1,6 +1,7 @@
 import HomeView from '../views/home/homeview.vue'
 import RegisterView from '../views/register/registerview.vue'
 import LoginView from '../views/login/loginview.vue'
+import CartView from '../views/cart/cartview.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -20,6 +21,11 @@ const router = createRouter({
         path: '/login',
         name: 'login',
         component: LoginView
+      },
+      {
+        path: '/cart',
+        name: 'cart',
+        component: CartView
       }
     ]
 })

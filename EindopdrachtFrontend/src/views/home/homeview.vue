@@ -11,16 +11,19 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
   
 <script>
 import axios from 'axios';
 import ProductCard from '@/components/productcard/productcard.vue';
+import Footer from '@/components/footer/footer.vue';
 
 export default {
   name: 'HomeView',
   components: {
-  ProductCard
+  ProductCard,
+  Footer
   },
   data() {
     return {

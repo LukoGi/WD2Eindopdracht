@@ -8,12 +8,14 @@
         </div>
         <div class="card-footer">
             <span class="float-start"><h3 class="m-1">€{{ product.price.toFixed(2) }}</h3></span>
-            <button class="btn btn-secondary rounded-circle float-end">+</button>
+            <button class="btn btn-secondary rounded-circle float-end" @click="addToCart(product)">+</button>
         </div>
     </div>
 </template>
 
 <script>
+import { useCartStore } from '@/stores/cart'
+
 export default {
     name: 'ProductCard',
     props: {
@@ -21,6 +23,12 @@ export default {
         type: Object,
         required: true
         }
+    },
+    methods: {
+        addToCart(product) {
+            const cart = useCartStore()
+            cart.addToCart(product)
+        },
     }
 };
 </script>
