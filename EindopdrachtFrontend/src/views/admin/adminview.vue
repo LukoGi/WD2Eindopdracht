@@ -38,8 +38,13 @@ export default {
         // You can redirect to a product edit page or open a modal for editing the product
         },
         removeProduct(product) {
-        // Handle the remove action
-        // You can make an axios request to delete the product from the database
+            axios.delete(`${import.meta.env.VITE_API_URL}/products/${product.id}`)
+                .then(response => {
+                    this.products = this.products.filter(p => p.id !== product.id);
+                })
+                .catch(error => {
+                    console.error('Failed to delete product:', error);
+                });
         }
     }
 };

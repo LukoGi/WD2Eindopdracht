@@ -15,6 +15,7 @@ $router->setNamespace('Controllers');
 
 // routes for the products endpoint
 $router->get('/products', 'ProductController@getAllProducts');
+$router->delete('/products/(\d+)', 'ProductController@deleteProduct');
 
 // routes for the users endpoint
 $router->post('/users', 'UserController@createUser');

@@ -22,4 +22,16 @@ class ProductRepository extends Repository
             throw new \Exception('Error getting products');
         }
     }
+
+    public function deleteProduct($id)
+    {
+        try {
+            $stmt = $this->connection->prepare("DELETE FROM products WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            error_log('Error deleting product: ' . $e->getMessage());
+            throw new \Exception('Error deleting product');
+        }
+    }
 }

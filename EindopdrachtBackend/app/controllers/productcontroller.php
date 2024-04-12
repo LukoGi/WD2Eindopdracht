@@ -31,4 +31,23 @@ class ProductController extends Controller
             $this->respondWithError(500, "An error occurred while retrieving products");
          }
     }
+
+    public function deleteProduct($id)
+    {
+        try {
+            $decoded = $this->checkForJwt();
+
+            if ($decoded->data->userId !== 1) {
+                $this->respondWithError(403, "You are not authorized to delete products");
+                return;
+            }
+
+            $this->service->deleteProduct($id);
+
+            $this->respond(null, 200);
+        } catch (\Exception $e) {
+            error_log($e->getMessage());
+            $this->respondWithError(500, "An error occurred while deleting product");
+        }
+    }
 }
