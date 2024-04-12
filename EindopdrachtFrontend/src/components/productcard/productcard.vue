@@ -28,6 +28,7 @@ export default {
         addToCart(product) {
             const cart = useCartStore()
             cart.addToCart(product)
+            alert('Product added to cart')
         },
     }
 };

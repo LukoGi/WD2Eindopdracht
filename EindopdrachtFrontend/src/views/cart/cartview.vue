@@ -28,37 +28,25 @@ export default {
             }
 
             try {
-                axios.post(`${import.meta.env.VITE_API_URL}/orders`, {
-                    user_id: auth.isLoggedIn ? auth.userId : null
-                    })
-                    .then(orderResponse => {
-                    // Handle the response here
-                    })
-                    .catch(error => {
-                    console.error('Failed to place order:', error)
-                    });
+                const orderResponse = await axios.post(`${import.meta.env.VITE_API_URL}/orders`, {
+                user_id: auth.isLoggedIn ? auth.userId : null
+                })
 
                 const orderItemsPromises = cart.items.map(item => {
                 return axios.post(`${import.meta.env.VITE_API_URL}/orderItems`, {
                     order_id: orderResponse.data.id,
                     product_id: item.id
                 })
-                .then(orderItemResponse => {
-                    // Handle the response here
-                })
-                .catch(error => {
-                    console.error('Failed to create order item:', error)
-                });
                 })
 
                 await Promise.all(orderItemsPromises)
 
-                // Clear the cart
                 cart.clearCart()
 
                 alert('Your order has been placed.')
-            } catch (error) {
-                console.error('Failed to place order:', error)
+            }
+            catch (error) {
+                console.error('Failed to place order:', error);
             }
         }
     }

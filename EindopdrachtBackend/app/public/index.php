@@ -20,5 +20,11 @@ $router->get('/products', 'ProductController@getAllProducts');
 $router->post('/users', 'UserController@createUser');
 $router->post('/users/login', 'UserController@loginUser');
 
+// routes for the orders endpoint
+$router->post('/orders', 'OrderController@createOrder');
+
+// routes for the orderItems endpoint
+$router->post('/orderItems', 'OrderItemController@createOrderItem');
+
 // Run it!
 $router->run();
