@@ -17,6 +17,7 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <li v-if="!isLoggedIn"><router-link class="dropdown-item" to="/register">Register</router-link></li>
               <li v-if="!isLoggedIn"><router-link class="dropdown-item" to="/login">Login</router-link></li>
+              <li v-if="isAdmin"><router-link class="dropdown-item" to="/admin">Admin</router-link></li>
               <li v-if="isLoggedIn"><a class="dropdown-item" href="#" @click="logout">Logout</a></li>
             </ul>
           </li>
@@ -40,6 +41,10 @@ export default {
     isLoggedIn() {
       const auth = useAuthStore();
       return auth.isLoggedIn;
+    },
+    isAdmin() {
+      const auth = useAuthStore();
+      return auth.isLoggedIn && auth.getUserId == '1';
     }
   },
   methods: {
