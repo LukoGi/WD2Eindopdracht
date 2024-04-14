@@ -9,7 +9,7 @@
             <input type="text" class="form-control" id="username" v-model="username" placeholder="Username/email" required>
           </div>
           <div class="form-group mb-3">
-            <input type="password" class="form-control" id="password" v-model="password" placeholder="Password (8+ characters long)" required>
+            <input type="password" class="form-control" id="password" v-model="password" placeholder="Password" required>
           </div>
           <button type="submit" class="btn btn-primary mt-3 w-100">Register</button>
         </form>
