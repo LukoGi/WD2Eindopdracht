@@ -40,8 +40,7 @@ export default {
             this.$router.push('/admin/add-product');
         },
         editProduct(product) {
-        // Handle the edit action
-        // You can redirect to a product edit page or open a modal for editing the product
+            this.$router.push({ name: 'EditProduct', params: { id: product.id } });
         },
         removeProduct(product) {
             axios.delete(`${import.meta.env.VITE_API_URL}/products/${product.id}`)

@@ -72,4 +72,42 @@ class ProductController extends Controller
             $this->respondWithError(500, "An error occurred while creating product");
         }
     }
+
+    public function getProductById($id)
+    {
+        try {
+            $product = $this->service->getProductById($id);
+
+            if (!$product) {
+                $this->respondWithError(404, "Product not found");
+                return;
+            }
+
+            $this->respond($product);
+        } catch (\Exception $e) {
+            error_log($e->getMessage());
+            $this->respondWithError(500, "An error occurred while retrieving product");
+        }
+    }
+
+    public function updateProduct($id)
+    {
+        try {
+            $decoded = $this->checkForJwt();
+
+            if ($decoded->data->userId !== 1) {
+                $this->respondWithError(403, "You are not authorized to update products");
+                return;
+            }
+
+            $product = $this->createObjectFromPostedJson(Product::class);
+
+            $updatedProduct = $this->service->updateProduct($id, $product);
+
+            $this->respond($updatedProduct);
+        } catch (\Exception $e) {
+            error_log($e->getMessage());
+            $this->respondWithError(500, "An error occurred while updating product");
+        }
+    }
 }

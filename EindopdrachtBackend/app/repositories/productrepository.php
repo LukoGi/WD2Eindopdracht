@@ -54,4 +54,37 @@ class ProductRepository extends Repository
             throw new \Exception('Error creating product');
         }
     }
+
+    public function getProductById($id)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT * FROM products WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_CLASS, Product::class);
+            return $stmt->fetch();
+        } catch (PDOException $e) {
+            error_log('Error getting product: ' . $e->getMessage());
+            throw new \Exception('Error getting product');
+        }
+    }
+
+    public function updateProduct($id, $product)
+    {
+        try {
+            $stmt = $this->connection->prepare("UPDATE products SET title = :title, price = :price, description = :description, category = :category, image = :image WHERE id = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':title', $product->title);
+            $stmt->bindParam(':price', $product->price);
+            $stmt->bindParam(':description', $product->description);
+            $stmt->bindParam(':category', $product->category);
+            $stmt->bindParam(':image', $product->image);
+            $stmt->execute();
+
+            return $this->getProductById($id);
+        } catch (PDOException $e) {
+            error_log('Error updating product: ' . $e->getMessage());
+            throw new \Exception('Error updating product');
+        }
+    }
 }

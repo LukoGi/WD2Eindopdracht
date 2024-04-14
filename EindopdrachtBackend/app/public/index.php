@@ -17,6 +17,8 @@ $router->setNamespace('Controllers');
 $router->get('/products', 'ProductController@getAllProducts');
 $router->delete('/products/(\d+)', 'ProductController@deleteProduct');
 $router->post('/products', 'ProductController@createProduct');
+$router->get('/products/(\d+)', 'ProductController@getProductById');
+$router->put('/products/(\d+)', 'ProductController@updateProduct');
 
 // routes for the users endpoint
 $router->post('/users', 'UserController@createUser');

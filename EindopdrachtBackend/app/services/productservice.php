@@ -24,4 +24,14 @@ class ProductService {
     {
         return $this->repository->createProduct($product);
     }
+
+    public function getProductById($id)
+    {
+        return $this->repository->getProductById($id);
+    }
+
+    public function updateProduct($id, $product)
+    {
+        return $this->repository->updateProduct($id, $product);
+    }
 }
