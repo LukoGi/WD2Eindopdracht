@@ -10,7 +10,6 @@ class ProductController extends Controller
 {
     private $service;
 
-    // initialize services
     function __construct()
     {
         $this->service = new ProductService();

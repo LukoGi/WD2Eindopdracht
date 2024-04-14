@@ -39,4 +39,17 @@ class OrderRepository extends Repository
             throw new \Exception('Error fetching order');
         }
     }
+
+    public function getOrdersByUserId($userId)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT * FROM orders WHERE user_id = :user_id");
+            $stmt->bindParam(':user_id', $userId);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_CLASS, Order::class);
+        } catch (PDOException $e) {
+            error_log('Error getting orders: ' . $e->getMessage());
+            throw new \Exception('Error getting orders');
+        }
+    }
 }

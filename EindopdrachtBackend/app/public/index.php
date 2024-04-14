@@ -26,9 +26,11 @@ $router->post('/users/login', 'UserController@loginUser');
 
 // routes for the orders endpoint
 $router->post('/orders', 'OrderController@createOrder');
+$router->get('/orders/(\d+)', 'OrderController@getOrdersByUserId');
 
 // routes for the orderItems endpoint
 $router->post('/orderItems', 'OrderItemController@createOrderItem');
+$router->get('/orderItems/(\d+)', 'OrderItemController@getOrderItemsByOrderId');
 
 // Run it!
 $router->run();

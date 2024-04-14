@@ -10,7 +10,6 @@ class OrderItemController extends Controller
 {
     private $service;
 
-    // initialize services
     function __construct()
     {
         $this->service = new OrderItemService();
@@ -25,6 +24,23 @@ class OrderItemController extends Controller
         } catch (\Exception $e) {
             error_log($e->getMessage());
             $this->respondWithError(500, "An error occurred while creating order item");
+        }
+    }
+
+    public function getOrderItemsByOrderId($orderId)
+    {
+        try {
+            $orderItems = $this->service->getOrderItemsByOrderId($orderId);
+
+            if (!$orderItems) {
+                $this->respondWithError(404, "Order items not found");
+                return;
+            }
+
+            $this->respond($orderItems);
+        } catch (\Exception $e) {
+            error_log($e->getMessage());
+            $this->respondWithError(500, "An error occurred while retrieving order items");
         }
     }
 }

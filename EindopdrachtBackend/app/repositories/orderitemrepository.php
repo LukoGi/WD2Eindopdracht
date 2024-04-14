@@ -40,4 +40,17 @@ class OrderItemRepository extends Repository
             throw new \Exception('Error fetching order item');
         }
     }
+
+    public function getOrderItemsByOrderId($orderId)
+    {
+        try {
+            $stmt = $this->connection->prepare("SELECT * FROM order_items WHERE order_id = :order_id");
+            $stmt->bindParam(':order_id', $orderId);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_CLASS, OrderItem::class);
+        } catch (PDOException $e) {
+            error_log('Error getting order items: ' . $e->getMessage());
+            throw new \Exception('Error getting order items');
+        }
+    }
 }

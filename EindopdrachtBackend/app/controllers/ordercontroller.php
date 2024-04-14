@@ -10,7 +10,6 @@ class OrderController extends Controller
 {
     private $service;
 
-    // initialize services
     function __construct()
     {
         $this->service = new OrderService();
@@ -25,6 +24,25 @@ class OrderController extends Controller
         } catch (\Exception $e) {
             error_log($e->getMessage());
             $this->respondWithError(500, "An error occurred while creating order");
+        }
+    }
+
+    public function getOrdersByUserId($userId)
+    {
+        try {
+            $decoded = $this->checkForJwt();
+
+            if ((string) $decoded->data->userId !== (string) $userId) {
+                $this->respondWithError(403, "You are not authorized to view these orders");
+                return;
+            }
+
+            $orders = $this->service->getOrdersByUserId($userId);
+
+            $this->respond($orders);
+        } catch (\Exception $e) {
+            error_log($e->getMessage());
+            $this->respondWithError(500, "An error occurred while retrieving orders");
         }
     }
 }

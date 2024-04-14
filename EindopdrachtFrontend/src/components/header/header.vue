@@ -18,6 +18,7 @@
               <li v-if="!isLoggedIn"><router-link class="dropdown-item" to="/register">Register</router-link></li>
               <li v-if="!isLoggedIn"><router-link class="dropdown-item" to="/login">Login</router-link></li>
               <li v-if="isAdmin"><router-link class="dropdown-item" to="/admin">Admin</router-link></li>
+              <li v-if="isLoggedIn"><router-link class="dropdown-item" to="/order-history">Order history</router-link></li>
               <li v-if="isLoggedIn"><a class="dropdown-item" href="#" @click="logout">Logout</a></li>
             </ul>
           </li>

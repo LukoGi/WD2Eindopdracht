@@ -5,6 +5,7 @@ import CartView from '../views/cart/cartview.vue'
 import AdminView from '../views/admin/adminview.vue'
 import AddProductView from '../views/admin/addproduct/addproductview.vue';
 import EditProductView from '../views/admin/editproduct/editproductview.vue';
+import OrderHistoryView from '../views/orderhistory/orderhistoryview.vue';
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -44,6 +45,11 @@ const router = createRouter({
         path: '/admin/edit-product/:id',
         name: 'EditProduct',
         component: EditProductView
+      },
+      {
+        path: '/order-history',
+        name: 'OrderHistory',
+        component: OrderHistoryView,
       }
     ]
 })

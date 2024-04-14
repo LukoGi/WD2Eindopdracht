@@ -15,4 +15,9 @@ class OrderItemService {
     public function createOrderItem($orderItem) {
         return $this->repository->createOrderItem($orderItem);
     }
+
+    public function getOrderItemsByOrderId($orderId)
+    {
+        return $this->repository->getOrderItemsByOrderId($orderId);
+    }
 }
