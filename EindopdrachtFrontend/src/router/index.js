@@ -3,6 +3,7 @@ import RegisterView from '../views/register/registerview.vue'
 import LoginView from '../views/login/loginview.vue'
 import CartView from '../views/cart/cartview.vue'
 import AdminView from '../views/admin/adminview.vue'
+import AddProductView from '../views/admin/addproductview.vue';
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -32,6 +33,11 @@ const router = createRouter({
         path: '/admin',
         name: 'admin',
         component: AdminView
+      },
+      {
+        path: '/admin/add-product',
+        name: 'AddProduct',
+        component: AddProductView
       }
     ]
 })

@@ -19,4 +19,9 @@ class ProductService {
     public function deleteProduct($id) {
         $this->repository->deleteProduct($id);
     }
+
+    public function createProduct($product)
+    {
+        return $this->repository->createProduct($product);
+    }
 }

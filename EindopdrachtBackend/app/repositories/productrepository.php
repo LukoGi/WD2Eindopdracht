@@ -34,4 +34,24 @@ class ProductRepository extends Repository
             throw new \Exception('Error deleting product');
         }
     }
+
+    public function createProduct($product)
+    {
+        try {
+            $stmt = $this->connection->prepare("INSERT INTO products (title, price, description, category, image) VALUES (:title, :price, :description, :category, :image)");
+            $stmt->bindParam(':title', $product->title);
+            $stmt->bindParam(':price', $product->price);
+            $stmt->bindParam(':description', $product->description);
+            $stmt->bindParam(':category', $product->category);
+            $stmt->bindParam(':image', $product->image);
+            $stmt->execute();
+
+            $product->id = $this->connection->lastInsertId();
+
+            return $product;
+        } catch (PDOException $e) {
+            error_log('Error creating product: ' . $e->getMessage());
+            throw new \Exception('Error creating product');
+        }
+    }
 }

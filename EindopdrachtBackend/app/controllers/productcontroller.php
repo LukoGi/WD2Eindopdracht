@@ -4,6 +4,7 @@ namespace Controllers;
 
 use Exception;
 use Services\ProductService;
+use Models\Product;
 
 class ProductController extends Controller
 {
@@ -48,6 +49,27 @@ class ProductController extends Controller
         } catch (\Exception $e) {
             error_log($e->getMessage());
             $this->respondWithError(500, "An error occurred while deleting product");
+        }
+    }
+
+    public function createProduct()
+    {
+        try {
+            $decoded = $this->checkForJwt();
+
+            if ($decoded->data->userId !== 1) {
+                $this->respondWithError(403, "You are not authorized to create products");
+                return;
+            }
+
+            $product = $this->createObjectFromPostedJson(Product::class);
+
+            $createdProduct = $this->service->createProduct($product);
+
+            $this->respond($createdProduct);
+        } catch (\Exception $e) {
+            error_log($e->getMessage());
+            $this->respondWithError(500, "An error occurred while creating product");
         }
     }
 }

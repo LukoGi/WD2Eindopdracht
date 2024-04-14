@@ -1,11 +1,14 @@
 <template>
     <div class="admin">
-      <h1>Admin Panel</h1>
-      <div class="row">
-        <div class="col-lg-3 col-md-6 mb-4" v-for="product in products" :key="product.id">
-          <AdminCard :product="product" @edit="editProduct" @remove="removeProduct" />
+        <div class="d-flex align-items-center">
+            <h1 class="mb-0">Admin Panel</h1>
+            <button class="btn btn-success ms-3 styled-button" @click="addProduct">+</button>
         </div>
-      </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4" v-for="product in products" :key="product.id">
+                <AdminCard :product="product" @edit="editProduct" @remove="removeProduct" />
+            </div>
+        </div>
     </div>
 </template>
 
@@ -33,6 +36,9 @@ export default {
         });
     },
     methods: {
+        addProduct() {
+            this.$router.push('/admin/add-product');
+        },
         editProduct(product) {
         // Handle the edit action
         // You can redirect to a product edit page or open a modal for editing the product
